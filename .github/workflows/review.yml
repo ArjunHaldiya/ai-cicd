@@ -1,0 +1,20 @@
+name : CODE REVIEW
+
+on:           # ← WHEN does it run?
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:          # ← WHAT does it do?
+  review:
+    runs-on: ubuntu-latest
+    env:
+      MISTRAL_API:${{ secrets.MISTRAL_API }}
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python3 pipeline.py 
