@@ -16,7 +16,7 @@ def call_mistral(prompt: str) -> str:
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
-                model="mistralai/magistral-small-2506",
+                model="mistralai/mistral-small-latest",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,
                 max_tokens=500

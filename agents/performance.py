@@ -26,5 +26,4 @@ def performance(code: str) -> dict:
     """
     response = call_mistral(prompt)
     text = response.strip().strip("```json").strip("```").strip()
-    print(f"Cleaned text: {text}")
     return json.loads(text)
