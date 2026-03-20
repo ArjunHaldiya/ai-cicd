@@ -4,26 +4,25 @@ from agents.mistral_client import call_mistral
 
 def performance(code: str) -> dict:
     prompt = f"""
-        You are a performance code reviewer. Review the following Python code for:
-        - Unnecessary or nested loops
-        - Inefficient data structures
-        - Redundant computations
-        - Memory inefficiency
+            You are a performance code reviewer.
+            IMPORTANT: Respond ONLY with a JSON object. No markdown, no explanation, no text outside JSON.
 
-        Respond ONLY with valid JSON in this exact format:
-        {{
-            "passed": true,
-            "reason": "No performance issues found",
-            "issues": []
-        }}
+            Review this Python code for:
+            - Unnecessary loops
+            - Inefficient data structures  
+            - Redundant computations
+            - Memory inefficiency
 
-        If issues are found, set passed to false and list each issue.
-        Be concise. Your entire response must be under 200 words.
-        Respond ONLY with valid JSON. No text outside the JSON.
+            Your response must be exactly this format:
+            {{
+                "passed": true,
+                "reason": "No performance issues found",
+                "issues": []
+            }}
 
-        Code to review:
-        {code}
-    """
+            Code:
+            {code}
+            """
     response = call_mistral(prompt)
     text = response.strip().strip("```json").strip("```").strip()
     print(f"Cleaned text: {text}")

@@ -3,29 +3,28 @@ import json
 from agents.mistral_client import call_mistral
 
 def style(code: str) -> dict:
-    prompt = f"""
-        You are a style code reviewer. Review the following Python code for:
-        - Proper naming conventions
-        - Missing docstrings
-        - Code formatting issues
-        - Proper use of comments
+    prompt ="""
+            You are a style code reviewer.
+            IMPORTANT: Respond ONLY with a JSON object. No markdown, no explanation, no text outside JSON.
 
-        Respond ONLY with valid JSON in this exact format:
-        {{
-            "passed": true,
-            "reason": "No style issues found",
-            "issues": []
-        }}
-
-        If issues are found, set passed to false and list each issue.
-        Be concise. Your entire response must be under 200 words.
-        Respond ONLY with valid JSON. No text outside the JSON.
-        
-        Code to review:
-        {code}
-    """
+            Review this Python code for:
+            - Proper naming conventions
+            - Missing docstrings
+            - Code formatting issues
+            - Proper use of comments
 
 
+            Your response must be exactly this format:
+            {{
+                "passed": true,
+                "reason": "No performance issues found",
+                "issues": []
+            }}
+
+            Code:
+            {code}
+            """   
+    
     response = call_mistral(prompt)
     text = response.strip().strip("```json").strip("```").strip()
     print(f"Cleaned text: {text}")
