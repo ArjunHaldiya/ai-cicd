@@ -28,6 +28,7 @@ def style(code: str) -> dict:
 
     response = call_mistral(prompt)
     text = response.strip().strip("```json").strip("```").strip()
+    print(f"RAW STYLE RESPONSE: {text}")
     try:
         return json.loads(text)
     except json.JSONDecodeError:
