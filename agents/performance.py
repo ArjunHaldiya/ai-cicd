@@ -26,4 +26,11 @@ def performance(code: str) -> dict:
     """
     response = call_mistral(prompt)
     text = response.strip().strip("```json").strip("```").strip()
-    return json.loads(text)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        return {
+        "passed": False,
+        "reason": "Agent response parse error",
+        "issues": ["Could not parse reviewer response"]
+        }
