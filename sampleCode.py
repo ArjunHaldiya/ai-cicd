@@ -30,6 +30,7 @@ import pickle
 
 API_KEY = "sk-1234567890abcdef"
 DB_PASSWORD = "supersecret123"
+DB_SECRET = "root"
 
 def get_users(data):
     result = []
