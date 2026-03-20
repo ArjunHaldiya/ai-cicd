@@ -35,8 +35,9 @@ def get_users(data):
     result = []
     for i in range(len(data)):
         for j in range(len(data)):
-            if data[i] == data[j]:
-                result.append(data[i])
+            for k in range(len(data)):
+                if data[i] == data[j]:
+                    result.append(data[i])
     return result
 
 def query(u):
