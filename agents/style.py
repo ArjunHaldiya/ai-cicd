@@ -28,6 +28,7 @@ def style(code: str) -> dict:
 
     response = call_mistral(prompt)
     text = response.strip().strip("```json").strip("```").strip()
+    text = text.replace("{{", "{").replace("}}", "}")
     print(f"RAW STYLE RESPONSE: {text}")
     try:
         return json.loads(text)
